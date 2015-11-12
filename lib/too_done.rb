@@ -12,29 +12,33 @@ module TooDone
   class App < Thor
 
     desc "add 'TASK'", "Add a TASK to a todo list."
-    option :Too_Done, :aliases => :l, :default => "*default*",
+    option :list, :aliases => :l, :default => "*default*",
       :desc => "The todo list which the task will be filed under."
     option :date, :aliases => :d,
       :desc => "A Due Date in YYYY-MM-DD format."
     def add(task)
-      list = list.find_or_create_by(name: options[:list] , user_id:  current_user.id)
-      Task.create(name: task, list_id: list.id, due_date: options[:date]) 
-    end
-        #binding.pry
-        puts "Creating todo task"
-        Task.find
+      list = List.find_or_create_by(name: options[:list] , user_id:  current_user.id)
+      Task.create(text: task, list_id: list.id) 
+    
+        #Need new migration to add due date and name
+
+
+        binding.pry
+        # puts "Creating todo task"
+        # Task.find
         
-        Task> exit
-        #binding.pry
+        # Task> exit
+        # #binding.pry
+    end
     desc "edit", "Edit a task from a todo list."
     option :list, :aliases => :l, :default => "*default*",
       :desc => "The todo list whose tasks will be edited."
 
     def edit  
-    list = Too_Done.find_by(user_id: current_user.id, name: options[:list]) 
-        if list == nil
-          puts "No list found."                                                                     
-        end 
+    # list = Too_Done.find_by(user_id: current_user.id, name: options[:list]) 
+    #     if list == nil
+    #       puts "No list found."                                                                     
+    #     end 
       # List.find
       # List.add
       # List.show
@@ -49,10 +53,10 @@ module TooDone
       :desc => "The todo list whose tasks will be completed."
     
     def done
-      list = Too_Done.find_by user_id: current_user.id, name: options[:list]
-      if list == nil
-        puts "Sorry. List not found."
-      end
+      # list = Too_Done.find_by user_id: current_user.id, name: options[:list]
+      # if list == nil
+      #   puts "Sorry. List not found."
+      # end
     end
 
     desc "show", "Show the tasks on a todo list in reverse order."
@@ -65,10 +69,10 @@ module TooDone
       \t\t\t\t\tLimits results to those with a due date."
     
     def show
-      list = Too_Done.find_by user_id: current_user.id, name: options[:list]
-      if list == nil
-        puts "List not found."
-      end
+      # list = Too_Done.find_by user_id: current_user.id, name: options[:list]
+      # if list == nil
+      #   puts "List not found."
+      # end
     end
 
     desc "delete [LIST OR USER]", "Delete a todo list or a user."
@@ -78,10 +82,10 @@ module TooDone
       :desc => "The user which will be deleted (including lists and items)."
     
     def delete
-      if options[:list] && options[:user]
-        puts "You can delete a list *OR* a user. Not both."
+      # if options[:list] && options[:user]
+      #   puts "You can delete a list *OR* a user. Not both."
 
-      end
+      # end
 
     end
 
@@ -100,4 +104,4 @@ module TooDone
 end
 
 # binding.pry
-Too_Done::App.start(ARGV)
+TooDone::App.start(ARGV)
