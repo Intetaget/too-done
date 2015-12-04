@@ -23,11 +23,8 @@ module TooDone
         #Need new migration to add due date and name
 
 
-        binding.pry
-        # puts "Creating todo task"
-        # Task.find
         
-        # Task> exit
+
         # #binding.pry
     end
     desc "edit", "Edit a task from a todo list."
@@ -53,10 +50,10 @@ module TooDone
       :desc => "The todo list whose tasks will be completed."
     
     def done
-      # list = Too_Done.find_by user_id: current_user.id, name: options[:list]
-      # if list == nil
-      #   puts "Sorry. List not found."
-      # end
+      list = Too_Done.find_by user_id: current_user.id, name: options[:list]
+      if list == nil
+        puts "Sorry. List not found."
+      end
     end
 
     desc "show", "Show the tasks on a todo list in reverse order."
@@ -69,10 +66,10 @@ module TooDone
       \t\t\t\t\tLimits results to those with a due date."
     
     def show
-      # list = Too_Done.find_by user_id: current_user.id, name: options[:list]
-      # if list == nil
-      #   puts "List not found."
-      # end
+      list = Too_Done.find_by user_id: current_user.id, name: options[:list]
+      if list == nil
+        puts "List not found."
+      end
     end
 
     desc "delete [LIST OR USER]", "Delete a todo list or a user."
