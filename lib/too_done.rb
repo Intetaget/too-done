@@ -1,3 +1,10 @@
+#edit, needs to be entered
+#show needs correction
+#delete  needed, not in
+##done  needs work
+#LIST   needs work
+
+
 require "too_done/version"
 require "too_done/init_db"
 require "too_done/user"
@@ -19,26 +26,20 @@ module TooDone
     def add(task)
       list = List.find_or_create_by(name: options[:list] , user_id:  current_user.id)
       Task.create(text: task, list_id: list.id) 
-    
         #Need new migration to add due date and name
-
-
-        
-
         # #binding.pry
     end
+    
     desc "edit", "Edit a task from a todo list."
     option :list, :aliases => :l, :default => "*default*",
       :desc => "The todo list whose tasks will be edited."
 
     def edit  
-    # list = Too_Done.find_by(user_id: current_user.id, name: options[:list]) 
-    #     if list == nil
-    #       puts "No list found."                                                                     
-    #     end 
-      # List.find
-      # List.add
-      # List.show
+     list = list.find_by(user_id: current_user.id, name: options[:list]) 
+         if list == nil
+           puts "No list found."                                                                     
+         end 
+
 
       # BAIL if it doesn't exist and have tasks
       # display the tasks and prompt for which one to edit
@@ -50,7 +51,7 @@ module TooDone
       :desc => "The todo list whose tasks will be completed."
     
     def done
-      list = Too_Done.find_by user_id: current_user.id, name: options[:list]
+      list = list.find_by user_id: current_user.id, name: options[:list]
       if list == nil
         puts "Sorry. List not found."
       end
@@ -66,7 +67,7 @@ module TooDone
       \t\t\t\t\tLimits results to those with a due date."
     
     def show
-      list = Too_Done.find_by user_id: current_user.id, name: options[:list]
+      list = list.find_by user_id: current_user.id, name: options[:list]
       if list == nil
         puts "List not found."
       end
@@ -79,10 +80,10 @@ module TooDone
       :desc => "The user which will be deleted (including lists and items)."
     
     def delete
-      # if options[:list] && options[:user]
-      #   puts "You can delete a list *OR* a user. Not both."
+      if options[:list] && options[:user]
+        puts "You can delete a list *OR* a user. Not both."
 
-      # end
+      end
 
     end
 
