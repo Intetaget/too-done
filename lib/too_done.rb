@@ -24,12 +24,13 @@ module TooDone
     option :date, :aliases => :d,
       :desc => "A Due Date in YYYY-MM-DD format."
     def add(task)
-      list = List.find_or_create_by(name: options[:list] , user_id:  current_user.id)
+      list = list.find_or_create_by(name: options[:list], user_id:  current_user.id)
       Task.create(text: task, list_id: list.id) 
+      puts "Added #{task} to list:#{list.name}"
         #Need new migration to add due date and name
         # #binding.pry
     end
-    
+
     desc "edit", "Edit a task from a todo list."
     option :list, :aliases => :l, :default => "*default*",
       :desc => "The todo list whose tasks will be edited."
@@ -65,7 +66,7 @@ module TooDone
     option :sort, :aliases => :s, :enum => ['history', 'overdue'],
       :desc => "Sorting by 'history' (chronological) or 'overdue'.
       \t\t\t\t\tLimits results to those with a due date."
-    
+        
     def show
       list = list.find_by user_id: current_user.id, name: options[:list]
       if list == nil
