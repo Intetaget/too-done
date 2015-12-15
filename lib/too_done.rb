@@ -55,6 +55,12 @@ module TooDone
       list = list.find_by user_id: current_user.id, name: options[:list]
       if list == nil
         puts "Sorry. List not found."
+      else display_list
+            puts "Please name the list to be marked done"
+      task_completed = STDIN.gets.chomp
+      task = Task.find_by(name: task_completed)
+      task.update(completed: true)
+      puts "#{task_completed} marked as completed"
       end
     end
 
@@ -71,7 +77,13 @@ module TooDone
       list = list.find_by user_id: current_user.id, name: options[:list]
       if list == nil
         puts "List not found."
+      else display_list
       end
+
+
+
+
+
     end
 
     desc "delete [LIST OR USER]", "Delete a todo list or a user."
@@ -83,8 +95,8 @@ module TooDone
     def delete
       if options[:list] && options[:user]
         puts "You can delete a list *OR* a user. Not both."
-
       end
+      list.delete
 
     end
 
