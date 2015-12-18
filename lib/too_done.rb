@@ -52,7 +52,7 @@ module TooDone
       :desc => "The todo list whose tasks will be completed."
     
     def done
-      list = list.find_by user_id: current_user.id, name: options[:list]
+      list = List.find_by user_id: current_user.id, name: options[:list]
       if list == nil
         puts "Sorry. List not found."
       else display_list
@@ -74,16 +74,16 @@ module TooDone
       \t\t\t\t\tLimits results to those with a due date."
         
     def show
-      list = list.find_by user_id: current_user.id, name: options[:list]
+      list = List.find_by user_id: current_user.id, name: options[:list]
       if list == nil
-        puts "List not found."
-      else display_list
+        puts "List not found: #{options[:list]}"
+      else
+        tasks = Task.where(list_id: list.id)
+        #tasks = list.tasks  YES RIGHT HERE IDIOT!!
+        # loop over the tasks and print them
+        puts "ID: #{task.id}, Title: #{task.title}"
+        
       end
-
-
-
-
-
     end
 
     desc "delete [LIST OR USER]", "Delete a todo list or a user."
