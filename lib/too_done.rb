@@ -65,7 +65,7 @@ module TooDone
     end
 
     desc "show", "Show the tasks on a todo list in reverse order."
-    option :list, :aliases => :l, :default => "*default*",
+    option :list, :aliases => :l, :default => "*de3efault*",
       :desc => "The todo list whose tasks will be shown."
     option :completed, :aliases => :c, :default => false, :type => :boolean,
       :desc => "Whether or not to show already completed tasks."
@@ -82,7 +82,7 @@ module TooDone
         #tasks = list.tasks  YES RIGHT HERE IDIOT!!
         # loop over the tasks and print them
         puts "ID: #{task.id}, Title: #{task.title}"
-        
+
       end
     end
 
@@ -96,7 +96,7 @@ module TooDone
       if options[:list] && options[:user]
         puts "You can delete a list *OR* a user. Not both."
       end
-      list.delete
+      list.destroy
 
     end
 
