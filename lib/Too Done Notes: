@@ -1,0 +1,22 @@
+Too Done Notes:
+
+Any time we're working on a project with a database and ORM/ActiveRecord,
+there is a workflow we tend to use:
+
+1. Make sure you have any tables you needed.
+2. If you don't have the tables, write a migration to add them.
+3. Make sure your models have any needed associations between the tables.
+   (Optional: If you need more foreign keys for the association to work, write a migration.)
+4. Use the models to write queries to actually "do the work".
+
+For steps 1 through 3:
+  * Use ActiveRecord Migration and Association guides
+
+For step 4:
+  * Use ActiveRecord Querying guide
+
+When working with ActiveRecord it's very important to remember when you're:
+  * Trying to query a table (use the model Class), remember to capitalize
+  * Versus working with an individual record/instance
+
+Normally, 
