@@ -16,6 +16,9 @@ require "thor"
 require "pry"
 
 module TooDone
+
+  #binding.pry
+
   class App < Thor
 
     desc "add 'TASK'", "Add a TASK to a todo list."
@@ -23,9 +26,10 @@ module TooDone
       :desc => "The todo list which the task will be filed under."
     option :date, :aliases => :d,
       :desc => "A Due Date in YYYY-MM-DD format."
+    
     def add(task)
-      list = list.find_or_create_by(name: options[:list], user_id:  current_user.id)
-      Task.create(text: task, list_id: list.id) 
+      list = List.find_or_create_by(name: options[:list], user_id: current_user.id)
+      task.create(text: task, list_id: list.id) 
       puts "Added #{task} to list:#{list.name}"
         #Need new migration to add due date and name
         # #binding.pry
@@ -36,7 +40,7 @@ module TooDone
       :desc => "The todo list whose tasks will be edited."
 
     def edit  
-     list = list.find_by(user_id: current_user.id, name: options[:list]) 
+     list = List.find_by(user_id: current_user.id, name: options[:list]) 
          if list == nil
            puts "No list found."                                                                     
          end 
@@ -65,7 +69,7 @@ module TooDone
     end
 
     desc "show", "Show the tasks on a todo list in reverse order."
-    option :list, :aliases => :l, :default => "*de3efault*",
+    option :list, :aliases => :l, :default => "*default*",
       :desc => "The todo list whose tasks will be shown."
     option :completed, :aliases => :c, :default => false, :type => :boolean,
       :desc => "Whether or not to show already completed tasks."
