@@ -83,10 +83,10 @@ module TooDone
         puts "List not found: #{options[:list]}"
       else
         tasks = Task.where(list_id: list.id)
-        #tasks = list.tasks  YES RIGHT HERE IDIOT!!
+        #tasks = list.tasks  YES RIGHT HERE !!
         # loop over the tasks and print them
-        puts "ID: #{task.id}, Title: #{task.title}"
-
+        puts "ID: #{Task.id}, Title: #{Task.name}"
+        #puts "#{answer.length} is the lenght of the word."
       end
     end
 
