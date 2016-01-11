@@ -29,8 +29,8 @@ module TooDone
     
     def add(task)
       list = List.find_or_create_by(name: options[:list], user_id: current_user.id)
-      task.create(text: task, list_id: list.id) 
-      puts "Added #{task} to list:#{list.name}"
+      task = Task.create(text: task, list_id: list.id) 
+      puts "Added #{task.text} to list:#{list.name}"
         #Need new migration to add due date and name
         # #binding.pry
     end
@@ -83,10 +83,12 @@ module TooDone
         puts "List not found: #{options[:list]}"
       else
         tasks = Task.where(list_id: list.id)
-        #tasks = list.tasks  YES RIGHT HERE !!
+        #task = tasks.first
         # loop over the tasks and print them
-        puts "ID: #{Task.id}, Title: #{Task.name}"
-        #puts "#{answer.length} is the lenght of the word."
+        #puts "ID: #{task.id}, Title: #{task.text}"
+        tasks.each do |task|
+          puts "ID: #{task.id}, Title: #{task.text}"
+        end
       end
     end
 
