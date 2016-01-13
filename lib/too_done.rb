@@ -100,12 +100,20 @@ module TooDone
     def delete
       if options[:list] && options[:user]
         puts "You can delete a list *OR* a user. Not both."
-      elsif
-          list = current_user.lists.find_by(text: options[:list])
-          list.destroy
-          #f(list||user).destroy
+        exit
       end
-
+        # BAIL if neither list or user option is provided
+       unless options[:list] || options[:user]
+         puts "You must provide an option."
+         exit
+       end
+      options[:list]
+          list = current_user.lists.find_by(name: options[:list])
+          #binding.pry
+          list.destroy
+          #if(list||user).destroy
+      end
+      #binding.pry
     end
 
     desc "switch USER", "Switch session to manage USER's todo lists."
