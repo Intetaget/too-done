@@ -85,7 +85,6 @@ module TooDone
         tasks = Task.where(list_id: list.id)
         #task = tasks.first
         # loop over the tasks and print them
-        #puts "ID: #{task.id}, Title: #{task.text}"
         tasks.each do |task|
           puts "ID: #{task.id}, Title: #{task.text}"
         end
@@ -101,8 +100,11 @@ module TooDone
     def delete
       if options[:list] && options[:user]
         puts "You can delete a list *OR* a user. Not both."
+      elsif
+          list = current_user.lists.find_by(text: options[:list])
+          list.destroy
+          #f(list||user).destroy
       end
-      list.destroy
 
     end
 
