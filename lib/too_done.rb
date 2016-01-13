@@ -42,9 +42,9 @@ module TooDone
     def edit  
      list = List.find_by(user_id: current_user.id, name: options[:list]) 
          if list == nil
-           puts "No list found."                                                                     
+           puts "No list found."                                                                   
          end 
-
+          
 
       # BAIL if it doesn't exist and have tasks
       # display the tasks and prompt for which one to edit
@@ -107,12 +107,19 @@ module TooDone
          puts "You must provide an option."
          exit
        end
-      options[:list]
+      if options[:list]
           list = current_user.lists.find_by(name: options[:list])
           #binding.pry
           list.destroy
+          puts list.name + " has been DESTROYED!!"
+        end
+        if options[:user]
+          user=User.find_by(name: options[:user])
+          user.destroy
+          puts user.name + "destroyed"
+        end
           #if(list||user).destroy
-      end
+      
       #binding.pry
     end
 
@@ -121,7 +128,7 @@ module TooDone
       def switch(username)
       user = User.find_or_create_by(name: username)
       user.sessions.create
-    end
+      end
 
     private
     def current_user
