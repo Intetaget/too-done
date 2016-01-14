@@ -40,23 +40,27 @@ module TooDone
       :desc => "The todo list whose tasks will be edited."
 
     def edit  
-     list = List.find_by(user_id: current_user.id, name: options[:list]) 
-         if list == nil
+     list = current_user.lists.find_by(name: options[:name])
+          if list == nil
            puts "No list found."   
            exit
-          end
-          # display the tasks and prompt for which one to edit
-          tasks.each do |t|
-            puts "ID: #{t.id} | Task: {t.name}"
-          end
+          else
+          list=current_user.list.name
+          puts "Current List: #{list}"
           puts "which task should be changed?"
           task_id = STDIN.gets.chomp.to_i
           end
 
+          # display the tasks and prompt for which one to edit
+          # or tasks.each do |t|
+          #   puts "ID: #{t.id} | Task: {t.name} Due:"
+          #end
+
+
       # BAIL if it doesn't exist and have tasks
       # display the tasks and prompt for which one to edit
       # allow the user to change the title, due date
-
+    end
     desc "done", "Mark a task as completed."
     option :list, :aliases => :l, :default => "*default*",
       :desc => "The todo list whose tasks will be completed."
