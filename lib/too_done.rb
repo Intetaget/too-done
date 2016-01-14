@@ -17,8 +17,6 @@ require "pry"
 
 module TooDone
 
-  #binding.pry
-
   class App < Thor
 
     desc "add 'TASK'", "Add a TASK to a todo list."
@@ -41,13 +39,20 @@ module TooDone
 
     def edit  
      list = List.find_by(user_id: current_user.id, name: options[:list]) 
+          # BAIL if it doesn't exist and have tasks
          if list == nil
-           puts "No list found."                                                                   
+           puts "No list found."   
+           exit
+          end
+          # display the tasks and prompt for which one to edit
+          tasks.each do |t|
+            puts "ID: #{t.id} | Task: {t.name} Due:#{due_date}"
+          end
+          # display the tasks and prompt for which one to edit
+          puts "which task should be changed?"
+          task_id = STDIN.gets.chomp.to_i
          end 
-          
-
-      # BAIL if it doesn't exist and have tasks
-      # display the tasks and prompt for which one to edit
+      
       # allow the user to change the title, due date
     end
 
@@ -112,15 +117,12 @@ module TooDone
           #binding.pry
           list.destroy
           puts list.name + " has been DESTROYED!!"
-        end
+      end
         if options[:user]
           user=User.find_by(name: options[:user])
           user.destroy
           puts user.name + "destroyed"
         end
-          #if(list||user).destroy
-      
-      #binding.pry
     end
 
     desc "switch USER", "Switch session to manage USER's todo lists."
@@ -134,7 +136,7 @@ module TooDone
     def current_user
       Session.last.user
     end
-  end
+  
 end
 
 # binding.pry
