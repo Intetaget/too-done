@@ -47,17 +47,15 @@ module TooDone
           end
           # display the tasks and prompt for which one to edit
           tasks.each do |t|
-            puts "ID: #{t.id} | Task: {t.name} Due:#{due_date}"
+            puts "ID: #{t.id} | Task: {t.name}"
           end
           puts "which task should be changed?"
           task_id = STDIN.gets.chomp.to_i
-         end 
-
+          end
 
       # BAIL if it doesn't exist and have tasks
       # display the tasks and prompt for which one to edit
       # allow the user to change the title, due date
-    end
 
     desc "done", "Mark a task as completed."
     option :list, :aliases => :l, :default => "*default*",
@@ -143,7 +141,7 @@ module TooDone
       Session.last.user
     end
   end
-
+end
 
 # binding.pry
 TooDone::App.start(ARGV)
