@@ -45,7 +45,7 @@ module TooDone
            puts "No list found."   
            exit
           else
-          list=current_user.list.name
+          list=current_user.lists.name
           puts "Current List: #{list}"
           puts "which task should be changed?"
           task_id = STDIN.gets.chomp.to_i
