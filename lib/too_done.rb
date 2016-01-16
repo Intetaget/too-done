@@ -40,7 +40,7 @@ module TooDone
       :desc => "The todo list whose tasks will be edited."
 
     def edit  
-     list = current_user.lists.find_by(name: options[:name])
+     list = current_user.lists.find_by(name: options[:list])
           if list == nil
            puts "No list found."   
            exit
