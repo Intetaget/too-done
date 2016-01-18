@@ -44,12 +44,11 @@ module TooDone
           if list == nil
            puts "No list found."   
            exit
-          else
-          list=current_user.lists.name
+          end
+          #list=current_user.lists.name
           puts "Current List: #{list}"
           puts "which task should be changed?"
           task_id = STDIN.gets.chomp.to_i
-          end
           puts "Enter the new title:"
           new_title = STDIN.gets.chomp
           edit_task = Task.find(task_id)
