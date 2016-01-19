@@ -45,7 +45,6 @@ module TooDone
            puts "No list found."   
            exit
           end
-          #list=current_user.lists.name
           puts "Current List: #{list}"
           puts "which task should be changed?"
           task_id = STDIN.gets.chomp.to_i
@@ -73,10 +72,10 @@ module TooDone
       list = List.find_by user_id: current_user.id, name: options[:list]
       if list == nil
         puts "Sorry. List not found."
-      else display_list
+      else tasks = Task.where(list_id: list.id)
             puts "Please name the list to be marked done"
       task_completed = STDIN.gets.chomp
-      task = Task.find_by(name: task_completed)
+      task = Task.find_by(text: task_completed)
       task.update(completed: true)
       puts "#{task_completed} marked as completed"
       end
