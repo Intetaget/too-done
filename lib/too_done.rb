@@ -52,7 +52,7 @@ module TooDone
           puts "Enter the new title:"
           new_title = STDIN.gets.chomp
           edit_task = Task.find(task_id)
-          edit_task.name = new_title 
+          edit_task.text = new_title 
           edit_task.save
 
           # display the tasks and prompt for which one to edit
