@@ -99,7 +99,7 @@ module TooDone
         #task = tasks.first
         # loop over the tasks and print them
         tasks.each do |task|
-          puts "ID: #{task.id}, Title: #{task.text}"
+          puts "ID: #{task.id}, Title: #{task.text}, Done?: #{task.completed}"
         end
       end
     end
