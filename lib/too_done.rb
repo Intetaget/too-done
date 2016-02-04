@@ -53,6 +53,9 @@ module TooDone
           edit_task = Task.find(task_id)
           edit_task.text = new_title 
           edit_task.save
+          tasks.each do |list|
+          puts "ID: #{list.id}, Title: #{list.text}"
+          end
 
           # display the tasks and prompt for which one to edit
           # or tasks.each do |t|
@@ -72,12 +75,13 @@ module TooDone
       list = List.find_by user_id: current_user.id, name: options[:list]
       if list == nil
         puts "Sorry. List not found."
-      else tasks = Task.where(list_id: list.id)
-            puts "Please name the list to be marked done"
-      task_completed = STDIN.gets.chomp
-      task = Task.find_by(text: task_completed)
-      task.update(completed: true)
-      puts "#{task_completed} marked as completed"
+      else 
+        tasks = Task.where(list_id: list.id)
+        puts "Please name the list to be marked done"
+        task_completed = STDIN.gets.chomp.to_i
+        task = Task.find(task_completed)
+        task.update(completed: true)
+        puts "#{task_completed} marked as completed"
       end
     end
 
@@ -96,11 +100,11 @@ module TooDone
         puts "List not found: #{options[:list]}"
       else
         tasks = Task.where(list_id: list.id)
-        #task = tasks.first
-        # loop over the tasks and print them
         tasks.each do |task|
           puts "ID: #{task.id}, Title: #{task.text}, Done?: #{task.completed}"
-        end
+          if task.completed==false
+          puts "task not done"
+          end
       end
     end
 
@@ -142,13 +146,11 @@ module TooDone
       user = User.find_or_create_by(name: username)
       user.sessions.create
       end
-
     private
     def current_user
       Session.last.user
     end
   end
 end
-
 # binding.pry
 TooDone::App.start(ARGV)
