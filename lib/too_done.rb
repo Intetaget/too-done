@@ -104,7 +104,7 @@ module TooDone
           puts "ID: #{task.id}, Title: #{task.text}, Done?: #{task.completed}"
           if task.completed==false
           puts "task not done"
-        end
+          end
       end
     end
 
