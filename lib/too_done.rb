@@ -52,7 +52,7 @@ module TooDone
           edit_task = Task.find(task_id)
           edit_task.text = new_title 
           edit_task.save
-          tasks.each do |list|
+          task.each do |list|
           puts "ID: #{list.id}, Title: #{list.text}"
           end
 
@@ -108,7 +108,8 @@ module TooDone
       end
     end
 
-    desc "delete [LIST OR USER]", "Delete a todo list or a user."
+    
+    desc "delete [LIST OR USER]", "Delete a todo list or a user." 
     option :list, :aliases => :l, :default => "*default*",
       :desc => "The todo list which will be deleted (including items)."
     option :user, :aliases => :u,
