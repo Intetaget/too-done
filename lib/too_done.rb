@@ -39,7 +39,7 @@ module TooDone
       :desc => "The todo list whose tasks will be edited."
 
     def edit  
-     list = current_user.lists.find_by(name: options[:list])
+      list = current_user.lists.find_by(name: options[:list])
           if list == nil
            puts "No list found."   
            exit
@@ -55,7 +55,7 @@ module TooDone
           task.each do |list|
           puts "ID: #{list.id}, Title: #{list.text}"
           end
-
+      end
           # display the tasks and prompt for which one to edit
           # or tasks.each do |t|
           #   puts "ID: #{t.id} | Task: {t.name} Due:"
@@ -105,10 +105,11 @@ module TooDone
           if task.completed==false
           puts "task not done"
           end
+        end
       end
     end
 
-    
+
     desc "delete [LIST OR USER]", "Delete a todo list or a user." 
     option :list, :aliases => :l, :default => "*default*",
       :desc => "The todo list which will be deleted (including items)."
@@ -121,16 +122,16 @@ module TooDone
         exit
       end
         # BAIL if neither list or user option is provided
-       unless options[:list] || options[:user]
+        unless options[:list] || options[:user]
          puts "You must provide an option."
          exit
-       end
+        end
       if options[:list]
           list = current_user.lists.find_by(name: options[:list])
           #binding.pry
           list.destroy
           puts list.name + " has been DESTROYED!!"
-        end
+          end
         if options[:user]
           user=User.find_by(name: options[:user])
           user.destroy
