@@ -39,7 +39,7 @@ module TooDone
       :desc => "The todo list whose tasks will be edited."
 
     def edit  
-      list = current_user.lists.find_by(name: options[:list])
+     list = current_user.lists.find_by(name: options[:list])
           if list == nil
            puts "No list found."   
            exit
@@ -52,10 +52,10 @@ module TooDone
           edit_task = Task.find(task_id)
           edit_task.text = new_title 
           edit_task.save
-          task.each do |list|
+          tasks.each do |list|
           puts "ID: #{list.id}, Title: #{list.text}"
           end
-      end
+
           # display the tasks and prompt for which one to edit
           # or tasks.each do |t|
           #   puts "ID: #{t.id} | Task: {t.name} Due:"
@@ -94,6 +94,7 @@ module TooDone
       :desc => "Sorting by 'history' (chronological) or 'overdue'.
       \t\t\t\t\tLimits results to those with a due date."
         
+          end
     def show
       list = List.find_by user_id: current_user.id, name: options[:list]
       if list == nil
@@ -109,8 +110,7 @@ module TooDone
       end
     end
 
-
-    desc "delete [LIST OR USER]", "Delete a todo list or a user." 
+    desc "delete [LIST OR USER]", "Delete a todo list or a user."
     option :list, :aliases => :l, :default => "*default*",
       :desc => "The todo list which will be deleted (including items)."
     option :user, :aliases => :u,
@@ -122,23 +122,22 @@ module TooDone
         exit
       end
         # BAIL if neither list or user option is provided
-        unless options[:list] || options[:user]
+       unless options[:list] || options[:user]
          puts "You must provide an option."
          exit
-        end
+       end
       if options[:list]
           list = current_user.lists.find_by(name: options[:list])
           #binding.pry
           list.destroy
           puts list.name + " has been DESTROYED!!"
-          end
+        end
         if options[:user]
           user=User.find_by(name: options[:user])
           user.destroy
           puts user.name + "destroyed"
         end
           #if(list||user).destroy
-      end
       #binding.pry
     end
 
