@@ -57,6 +57,9 @@ module TooDone
           end
           puts "Current List: #{list}"
           puts "which task should be changed?"
+          
+
+          
           task_id = STDIN.gets.chomp.to_i
           puts "Enter the new title:"
           new_title = STDIN.gets.chomp
@@ -112,11 +115,6 @@ module TooDone
         end  
       end
     end
-
-    # #If you’ve removed the `end` you put on line 97 then you’re fine but keep in 
-    # mind that there shouldn’t be guesswork. You can always work backwards or forwards 
-    # to make sure ends match up with the things that need them: `module`, `class`, `def`, `if`, 
-    # and `do` blocks are the most common. (Though there are less common ones such as `case`.)
 
     desc "delete [LIST OR USER]", "Delete a todo list or a user."
     option :list, :aliases => :l, :default => "*default*",
