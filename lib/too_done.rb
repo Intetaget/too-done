@@ -55,13 +55,6 @@ module TooDone
           tasks.each do |list|
           puts "ID: #{list.id}, Title: #{list.text}"
           end
-
-          # display the tasks and prompt for which one to edit
-          # or tasks.each do |t|
-          #   puts "ID: #{t.id} | Task: {t.name} Due:"
-          #end
-
-
       # BAIL if it doesn't exist and have tasks
       # display the tasks and prompt for which one to edit
       # allow the user to change the title, due date
@@ -94,7 +87,6 @@ module TooDone
       :desc => "Sorting by 'history' (chronological) or 'overdue'.
       \t\t\t\t\tLimits results to those with a due date."
         
-          end
     def show
       list = List.find_by user_id: current_user.id, name: options[:list]
       if list == nil
@@ -106,9 +98,14 @@ module TooDone
           if task.completed==false
           puts "task not done"
           end
-        end
+        end  
       end
     end
+    
+    # #If you’ve removed the `end` you put on line 97 then you’re fine but keep in 
+    # mind that there shouldn’t be guesswork. You can always work backwards or forwards 
+    # to make sure ends match up with the things that need them: `module`, `class`, `def`, `if`, 
+    # and `do` blocks are the most common. (Though there are less common ones such as `case`.)
 
     desc "delete [LIST OR USER]", "Delete a todo list or a user."
     option :list, :aliases => :l, :default => "*default*",
@@ -138,6 +135,7 @@ module TooDone
           puts user.name + "destroyed"
         end
           #if(list||user).destroy
+      end
       #binding.pry
     end
 
