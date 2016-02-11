@@ -38,6 +38,17 @@ module TooDone
     option :list, :aliases => :l, :default => "*default*",
       :desc => "The todo list whose tasks will be edited."
 
+
+        # tasks = Task.where(list_id: list.id)
+        # tasks.each do |task|
+        #   puts "ID: #{task.id}, Title: #{task.text}, Done?: #{task.completed}"
+        #   if task.completed==false
+        #   puts "task not done"
+
+    
+
+
+
     def edit  
      list = current_user.lists.find_by(name: options[:list])
           if list == nil
@@ -101,7 +112,7 @@ module TooDone
         end  
       end
     end
-    
+
     # #If you’ve removed the `end` you put on line 97 then you’re fine but keep in 
     # mind that there shouldn’t be guesswork. You can always work backwards or forwards 
     # to make sure ends match up with the things that need them: `module`, `class`, `def`, `if`, 
@@ -128,14 +139,13 @@ module TooDone
           #binding.pry
           list.destroy
           puts list.name + " has been DESTROYED!!"
-        end
-        if options[:user]
+      end
+      if options[:user]
           user=User.find_by(name: options[:user])
           user.destroy
           puts user.name + "destroyed"
-        end
-          #if(list||user).destroy
       end
+          #if(list||user).destroy
       #binding.pry
     end
 
