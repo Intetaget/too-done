@@ -54,16 +54,16 @@ module TooDone
           puts "Current List: #{list}"
           puts "which task should be changed?"
           tasks = Task.where(list_id: list.id)
-          puts "ID: #{list.id}, Title: #{list.text}"
-          task_id = STDIN.gets.chomp.to_i
-          puts "Enter the new title:"
-          new_title = STDIN.gets.chomp
-          edit_task = Task.find(task_id) 
-          edit_task.text = new_title 
-          edit_task.save
           tasks.each do |list|
           puts "ID: #{list.id}, Title: #{list.text}"
           end
+          task_id = STDIN.gets.chomp.to_i
+          puts "Enter the new title:"
+          new_title = STDIN.gets.chomp
+          edit_task = Task.find(task_id)
+          edit_task.text = new_title 
+          edit_task.save
+          #end
       # BAIL if it doesn't exist and have tasks
       # display the tasks and prompt for which one to edit
       # allow the user to change the title, due date
@@ -79,6 +79,9 @@ module TooDone
         puts "Sorry. List not found."
       else 
         tasks = Task.where(list_id: list.id)
+        tasks.each do |list|
+        puts "ID: #{list.id}, Title: #{list.text}"
+        end        
         puts "Please name the list to be marked done"
         task_completed = STDIN.gets.chomp.to_i
         task = Task.find(task_completed)
