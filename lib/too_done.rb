@@ -45,10 +45,6 @@ module TooDone
         #   if task.completed==false
         #   puts "task not done"
 
-    
-
-
-
     def edit  
      list = current_user.lists.find_by(name: options[:list])
           if list == nil
@@ -57,13 +53,12 @@ module TooDone
           end
           puts "Current List: #{list}"
           puts "which task should be changed?"
-          
-
-          
+          tasks = Task.where(list_id: list.id)
+          puts "ID: #{list.id}, Title: #{list.text}"
           task_id = STDIN.gets.chomp.to_i
           puts "Enter the new title:"
           new_title = STDIN.gets.chomp
-          edit_task = Task.find(task_id)
+          edit_task = Task.find(task_id) 
           edit_task.text = new_title 
           edit_task.save
           tasks.each do |list|
